@@ -786,7 +786,7 @@
   <!-- Lightbox Modal -->
   <div class="modal-overlay" id="lightboxModal" onclick="closeModal(event)">
     <div class="modal-content" id="modalContent" onclick="event.stopPropagation()">
-      <img id="modalImg" src="" alt="Menú Ampliado" class="modal-img" onclick="closeModalDirect()">
+      <img id="modalImg" src="" alt="Menú Ampliado" class="modal-img" onclick="handleImageClick(event)">
       
       <div class="modal-footer">
         <button class="modal-nav-icon prev-btn" id="modalPrev" onclick="navigateModal(-1)" aria-label="Anterior">❮</button>
@@ -940,6 +940,17 @@
       updateModalView();
     }
 
+    function handleImageClick(e) {
+      if (currentGallery.length <= 1) return;
+      const rect = e.target.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX < rect.width * 0.4) {
+        navigateModal(-1);
+      } else {
+        navigateModal(1);
+      }
+    }
+
     function closeModal(e) {
       if (e.target.id === 'lightboxModal') {
         closeModalDirect();
@@ -952,24 +963,31 @@
       document.body.style.overflow = 'auto';
     }
 
-    // Touch Swipe Event Listeners for Mobile
+    // High-Precision Touch Swipe Event Listeners for Mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
     const modalContent = document.getElementById('modalContent');
     if (modalContent) {
       modalContent.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
       }, { passive: true });
 
       modalContent.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
         handleSwipe();
       }, { passive: true });
     }
 
     function handleSwipe() {
-      const diff = touchEndX - touchStartX;
-      if (Math.abs(diff) > 40) {
-        if (diff < 0) {
-          navigateModal(1); // Swipe left -> Next
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Ensure horizontal swipe is dominant and exceeds 35px threshold
+      if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY) * 1.1) {
+        if (diffX < 0) {
+          navigateModal(1);  // Swipe left -> Next
         } else {
           navigateModal(-1); // Swipe right -> Previous
         }
