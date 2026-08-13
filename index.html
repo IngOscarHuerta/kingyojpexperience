@@ -163,6 +163,17 @@
       padding-bottom: 0.75rem;
     }
 
+    .sub-section-title {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      color: var(--gold-light);
+      margin: 2.5rem 0 1.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 1px;
+    }
+
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -186,6 +197,51 @@
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--gold-glow);
     }
 
+    /* Horizontal Scroll Showcase for Drink Cover Images (No expansion) */
+    .horizontal-scroll-wrapper {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.75rem 0.25rem 1.25rem 0.25rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg-card);
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-track {
+      background: var(--bg-card);
+      border-radius: 99px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 99px;
+    }
+
+    .horizontal-scroll .menu-card.no-expand {
+      flex: 0 0 290px;
+      scroll-snap-align: start;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .horizontal-scroll .menu-card.no-expand:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-subtle);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px var(--gold-glow);
+    }
+
     .card-img-wrapper {
       width: 100%;
       aspect-ratio: 3 / 4;
@@ -201,7 +257,7 @@
       transition: transform 0.4s ease;
     }
 
-    .menu-card:hover .card-img {
+    .menu-card:not(.no-expand):hover .card-img {
       transform: scale(1.04);
     }
 
@@ -468,93 +524,153 @@
     <!-- Cocteleria y Bebidas Section -->
     <div class="menu-section" id="bebidas-section">
       <h2 class="section-title">🍹 Carta de Coctelería, Licores & Destilados</h2>
+      
+      <!-- Scroll Lateral para las imágenes de portada (Sin Expansión) -->
+      <div class="horizontal-scroll-wrapper">
+        <div class="horizontal-scroll">
+
+          <div class="menu-card no-expand" data-category="bebidas">
+            <div class="card-img-wrapper">
+              <span class="card-badge">Coctelería</span>
+              <img src="wp-content/uploads/2024/05/tomes.jpg" alt="Drink's Menu Kingyo" class="card-img" loading="lazy">
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">Coctelería de Autor I</h3>
+            </div>
+          </div>
+
+          <div class="menu-card no-expand" data-category="bebidas">
+            <div class="card-img-wrapper">
+              <span class="card-badge">Coctelería</span>
+              <img src="wp-content/uploads/2024/06/Mixologia.jpg" alt="Coctelería de Autor II" class="card-img" loading="lazy">
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">Coctelería de Autor II</h3>
+            </div>
+          </div>
+
+          <div class="menu-card no-expand" data-category="bebidas">
+            <div class="card-img-wrapper">
+              <span class="card-badge">Clásicos</span>
+              <img src="wp-content/uploads/2024/06/cocterleria-clasica.jpg" alt="Coctelería Clásica" class="card-img" loading="lazy">
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">Coctelería Clásica</h3>
+            </div>
+          </div>
+
+          <div class="menu-card no-expand" data-category="bebidas">
+            <div class="card-img-wrapper">
+              <span class="card-badge">Licores</span>
+              <img src="wp-content/uploads/2024/07/Licores.webp" alt="Licores & Destilados" class="card-img" loading="lazy">
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">Licores & Destilados</h3>
+            </div>
+          </div>
+
+          <div class="menu-card no-expand" data-category="bebidas">
+            <div class="card-img-wrapper">
+              <span class="card-badge">Bebidas</span>
+              <img src="wp-content/uploads/2024/07/Bebidas.webp" alt="Bebidas & Cervezas" class="card-img" loading="lazy">
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">Bebidas & Cervezas</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Menús Detallados de Bebidas (B1 - B12) - Con Expansión al hacer Clic -->
+      <h3 class="sub-section-title">📜 Menú de Bebidas y Precios</h3>
       <div class="menu-grid">
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B1.webp', 'Coctelería de Autor - B1')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B1.webp', 'Carta de Bebidas - Página 1')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Coctelería</span>
+            <span class="card-badge">Página 1</span>
             <img src="wp-content/uploads/2026/01/B1.webp" alt="Cocteleria Kingyo 1" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Coctelería de Autor I</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas I</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B2.webp', 'Coctelería de Autor - B2')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B2.webp', 'Carta de Bebidas - Página 2')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Coctelería</span>
+            <span class="card-badge">Página 2</span>
             <img src="wp-content/uploads/2026/01/B2.webp" alt="Cocteleria Kingyo 2" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Coctelería de Autor II</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas II</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B3.webp', 'Coctelería Clásica - B3')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B3.webp', 'Carta de Bebidas - Página 3')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Clásicos</span>
+            <span class="card-badge">Página 3</span>
             <img src="wp-content/uploads/2026/01/B3.webp" alt="Cocteleria Clásica" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Coctelería Clásica</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas III</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B4.webp', 'Destilados & Mezcal - B4')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B4.webp', 'Carta de Bebidas - Página 4')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Destilados</span>
-            <img src="wp-content/uploads/2026/01/B4.webp" alt="Mezcal y Destilados" class="card-img" loading="lazy">
+            <span class="card-badge">Página 4</span>
+            <img src="wp-content/uploads/2026/01/B4.webp" alt="Destilados" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Mezcal & Destilados</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas IV</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B5.webp', 'Tequila & Ginebra - B5')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B5.webp', 'Carta de Bebidas - Página 5')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Licores</span>
+            <span class="card-badge">Página 5</span>
             <img src="wp-content/uploads/2026/01/B5.webp" alt="Tequila y Ginebra" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Tequila & Ginebra</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas V</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B6.webp', 'Whisky & Ron - B6')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B6.webp', 'Carta de Bebidas - Página 6')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Licores</span>
-            <img src="wp-content/uploads/2026/01/B6.webp" alt="Whisky Ron" class="card-img" loading="lazy">
+            <span class="card-badge">Página 6</span>
+            <img src="wp-content/uploads/2026/01/B6.webp" alt="Whisky y Ron" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Whisky & Ron</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas VI</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B7.webp', 'Vinos & Sake - B7')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B7.webp', 'Carta de Bebidas - Página 7')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Sake & Vinos</span>
+            <span class="card-badge">Página 7</span>
             <img src="wp-content/uploads/2026/01/B7.webp" alt="Vinos y Sake" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Vinos & Sake Japonés</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas VII</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
-        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B8.webp', 'Cervezas & Sin Alcohol - B8')">
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B8.webp', 'Carta de Bebidas - Página 8')">
           <div class="card-img-wrapper">
-            <span class="card-badge">Bebidas</span>
-            <img src="wp-content/uploads/2026/01/B8.webp" alt="Cervezas" class="card-img" loading="lazy">
+            <span class="card-badge">Página 8</span>
+            <img src="wp-content/uploads/2026/01/B8.webp" alt="Cervezas y Sin Alcohol" class="card-img" loading="lazy">
           </div>
           <div class="card-info">
-            <h3 class="card-title">Cervezas & Bebidas</h3>
-            <span class="card-action">Ver carta 🔍</span>
+            <h3 class="card-title">Carta de Bebidas VIII</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
           </div>
         </div>
 
@@ -596,11 +712,24 @@
       const cards = document.querySelectorAll('.menu-card');
       cards.forEach(card => {
         if (cat === 'all' || card.getAttribute('data-category') === cat) {
-          card.style.display = 'block';
+          card.style.display = card.classList.contains('no-expand') ? 'flex' : 'block';
         } else {
           card.style.display = 'none';
         }
       });
+
+      const alimentosSec = document.getElementById('alimentos-section');
+      const bebidasSec = document.getElementById('bebidas-section');
+      if (cat === 'bebidas') {
+        alimentosSec.style.display = 'none';
+        bebidasSec.style.display = 'block';
+      } else if (cat === 'all') {
+        alimentosSec.style.display = 'block';
+        bebidasSec.style.display = 'block';
+      } else {
+        alimentosSec.style.display = 'block';
+        bebidasSec.style.display = 'block';
+      }
     }
 
     function openModal(src, title) {
