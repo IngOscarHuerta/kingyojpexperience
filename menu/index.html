@@ -464,6 +464,38 @@
       margin-top: 0.2rem;
     }
 
+    /* Fixed Floating Close Button (X) for Mobile & Desktop */
+    .modal-close-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(20, 20, 25, 0.85);
+      border: 1.5px solid rgba(212, 175, 55, 0.5);
+      color: var(--gold-light);
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10002;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .modal-close-btn:hover,
+    .modal-close-btn:active {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+      transform: scale(1.1);
+    }
+
     /* Mobile Quick Bar */
     .mobile-bar {
       position: fixed;
@@ -785,6 +817,7 @@
 
   <!-- Lightbox Modal -->
   <div class="modal-overlay" id="lightboxModal" onclick="closeModal(event)">
+    <button class="modal-close-btn" onclick="closeModalDirect()" aria-label="Cerrar ventana">✕</button>
     <div class="modal-content" id="modalContent" onclick="event.stopPropagation()">
       <img id="modalImg" src="" alt="Menú Ampliado" class="modal-img" onclick="handleImageClick(event)">
       
