@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Digital | Kingyo Japanese Experience</title>
+  <meta name="description" content="Menú oficial de Kingyo Japanese Experience. Entradas, Nigiris, Sashimi, Ramen, Makis, Teppanyaki, Especialidades y Coctelería de autor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0a0c;
+      --bg-card: #141418;
+      --bg-card-hover: #1c1c22;
+      --gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-glow: rgba(212, 175, 55, 0.2);
+      --text-main: #f5f5f7;
+      --text-muted: #a1a1aa;
+      --border-subtle: #27272a;
+      --font-title: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 90px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 12, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px var(--gold-glow));
+    }
+
+    .brand-title {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+
+    /* Category Nav */
+    .category-nav {
+      display: flex;
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 1250px;
+      padding: 0.5rem 1rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .category-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Desktop (900px+): Wrap cleanly, center items, no scrollbar or clipping */
+    @media (min-width: 900px) {
+      .category-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+      }
+    }
+
+    /* Mobile / Tablet (< 900px): Smooth touch scrolling with safe padding so no buttons clip */
+    @media (max-width: 899px) {
+      header {
+        padding: 1rem 0.5rem;
+      }
+
+      .category-nav {
+        overflow-x: auto;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        padding-bottom: 0.6rem;
+      }
+
+      .category-nav .nav-btn:last-child {
+        margin-right: 1rem;
+      }
+    }
+
+    .nav-btn {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      padding: 0.65rem 1.25rem;
+      border-radius: 99px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+      box-shadow: 0 0 16px var(--gold-glow);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 1.75rem;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--gold-glow);
+    }
+
+    .card-img-wrapper {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: #111;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .menu-card:hover .card-img {
+      transform: scale(1.04);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--gold-light);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .card-info {
+      padding: 1.25rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    /* Lightbox Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(12px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 95vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-img {
+      max-width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .modal-caption {
+      margin-top: 1rem;
+      color: var(--gold-light);
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    /* Mobile Quick Bar */
+    .mobile-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 12, 0.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-around;
+      padding: 0.75rem 0.5rem;
+      z-index: 90;
+    }
+
+    .mobile-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mobile-tab.active, .mobile-tab:hover {
+      color: var(--gold);
+    }
+
+    .mobile-tab svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-header">
+      <img src="wp-content/uploads/2024/05/Logo-KYNGYO@4x.png" alt="Kingyo Logo" class="brand-logo" onerror="this.style.display='none'">
+      <h1 class="brand-title">Kingyo Japanese Experience</h1>
+    </div>
+
+    <nav class="category-nav">
+      <button class="nav-btn active" onclick="filterCategory('all', this)">✨ Todos</button>
+      <button class="nav-btn" onclick="filterCategory('entradas', this)">🥟 Entradas</button>
+      <button class="nav-btn" onclick="filterCategory('nigiris', this)">🍣 Nigiris & Ramen</button>
+      <button class="nav-btn" onclick="filterCategory('sashimi', this)">🍱 Sashimi & Hosomakis</button>
+      <button class="nav-btn" onclick="filterCategory('yakisoba', this)">🥢 Yakisoba & Donburis</button>
+      <button class="nav-btn" onclick="filterCategory('makis', this)">🍙 Makis & Teppan</button>
+      <button class="nav-btn" onclick="filterCategory('especialidades', this)">⭐ Especialidades</button>
+      <button class="nav-btn" onclick="filterCategory('bebidas', this)">🍹 Bebidas & Licores</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Comida / Alimentos Section -->
+    <div class="menu-section" id="alimentos-section">
+      <h2 class="section-title">🍣 Menú de Alimentos</h2>
+      <div class="menu-grid">
+        
+        <div class="menu-card" data-category="entradas" onclick="openModal('wp-content/uploads/2026/01/21-Entradas.webp', 'Entradas')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Entradas</span>
+            <img src="wp-content/uploads/2026/01/21-Entradas.webp" alt="Entradas Kingyo" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Entradas</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="nigiris" onclick="openModal('wp-content/uploads/2026/01/22-Nigiris-Temakis-Ramen.webp', 'Nigiris, Temakis & Ramen')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Nigiris & Ramen</span>
+            <img src="wp-content/uploads/2026/01/22-Nigiris-Temakis-Ramen.webp" alt="Nigiris Temakis Ramen" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Nigiris, Temakis & Ramen</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sashimi" onclick="openModal('wp-content/uploads/2026/01/23-Hosomakis-Sashimi-Tiraditos.webp', 'Hosomakis, Sashimi & Tiraditos')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Sashimi & Tiraditos</span>
+            <img src="wp-content/uploads/2026/01/23-Hosomakis-Sashimi-Tiraditos.webp" alt="Sashimi Tiraditos" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Hosomakis, Sashimi & Tiraditos</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="yakisoba" onclick="openModal('wp-content/uploads/2026/01/24-Moriawase-Yakisoba-Donburis-Yakimeshi.webp', 'Moriawase, Yakisoba, Donburis & Yakimeshi')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Yakisoba & Donburis</span>
+            <img src="wp-content/uploads/2026/01/24-Moriawase-Yakisoba-Donburis-Yakimeshi.webp" alt="Yakisoba Donburis" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Moriawase, Yakisoba & Donburis</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="makis" onclick="openModal('wp-content/uploads/2026/01/25-Makis.webp', 'Makis')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Makis</span>
+            <img src="wp-content/uploads/2026/01/25-Makis.webp" alt="Makis" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Makis Tradicionales</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="makis" onclick="openModal('wp-content/uploads/2026/01/26-Makis-Teppan.webp', 'Makis & Teppan')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Teppanyaki</span>
+            <img src="wp-content/uploads/2026/01/26-Makis-Teppan.webp" alt="Makis Teppan" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Makis & Teppanyaki</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="especialidades" onclick="openModal('wp-content/uploads/2026/01/27-Especialidades.webp', 'Especialidades Kingyo')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Especialidades</span>
+            <img src="wp-content/uploads/2026/01/27-Especialidades.webp" alt="Especialidades Kingyo" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Especialidades de la Casa</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/28-Mocktails.webp', 'Mocktails sin alcohol')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Mocktails</span>
+            <img src="wp-content/uploads/2026/01/28-Mocktails.webp" alt="Mocktails Kingyo" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Mocktails (Sin Alcohol)</h3>
+            <span class="card-action">Ver menú completo 🔍</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Cocteleria y Bebidas Section -->
+    <div class="menu-section" id="bebidas-section">
+      <h2 class="section-title">🍹 Carta de Coctelería, Licores & Destilados</h2>
+      <div class="menu-grid">
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B1.webp', 'Coctelería de Autor - B1')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Coctelería</span>
+            <img src="wp-content/uploads/2026/01/B1.webp" alt="Cocteleria Kingyo 1" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Coctelería de Autor I</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B2.webp', 'Coctelería de Autor - B2')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Coctelería</span>
+            <img src="wp-content/uploads/2026/01/B2.webp" alt="Cocteleria Kingyo 2" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Coctelería de Autor II</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B3.webp', 'Coctelería Clásica - B3')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Clásicos</span>
+            <img src="wp-content/uploads/2026/01/B3.webp" alt="Cocteleria Clásica" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Coctelería Clásica</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B4.webp', 'Destilados & Mezcal - B4')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Destilados</span>
+            <img src="wp-content/uploads/2026/01/B4.webp" alt="Mezcal y Destilados" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Mezcal & Destilados</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B5.webp', 'Tequila & Ginebra - B5')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Licores</span>
+            <img src="wp-content/uploads/2026/01/B5.webp" alt="Tequila y Ginebra" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Tequila & Ginebra</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B6.webp', 'Whisky & Ron - B6')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Licores</span>
+            <img src="wp-content/uploads/2026/01/B6.webp" alt="Whisky Ron" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Whisky & Ron</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B7.webp', 'Vinos & Sake - B7')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Sake & Vinos</span>
+            <img src="wp-content/uploads/2026/01/B7.webp" alt="Vinos y Sake" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Vinos & Sake Japonés</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="bebidas" onclick="openModal('wp-content/uploads/2026/01/B8.webp', 'Cervezas & Sin Alcohol - B8')">
+          <div class="card-img-wrapper">
+            <span class="card-badge">Bebidas</span>
+            <img src="wp-content/uploads/2026/01/B8.webp" alt="Cervezas" class="card-img" loading="lazy">
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Cervezas & Bebidas</h3>
+            <span class="card-action">Ver carta 🔍</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div class="modal-overlay" id="lightboxModal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModalDirect()">&times;</button>
+      <img id="modalImg" src="" alt="Menú Ampliado" class="modal-img">
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Bar -->
+  <div class="mobile-bar">
+    <div class="mobile-tab active" onclick="filterCategory('all', this)">
+      <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+      <span>Inicio</span>
+    </div>
+    <div class="mobile-tab" onclick="filterCategory('entradas', this)">
+      <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.46 3.9 3.45 4.38L6 22h2l.55-8.62C10.54 12.9 12 11.12 12 9V2h-1v7zm7-7s-3 3-3 8v12h2V12h3V2h-2z"/></svg>
+      <span>Comida</span>
+    </div>
+    <div class="mobile-tab" onclick="filterCategory('bebidas', this)">
+      <svg viewBox="0 0 24 24"><path d="M21 5V3H3v2l8 9v5H6v2h12v-2h-5v-5l8-9zM7.43 7L5.65 5h12.7l-1.78 2H7.43z"/></svg>
+      <span>Bebidas</span>
+    </div>
+  </div>
+
+  <script>
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.nav-btn, .mobile-tab').forEach(el => el.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.menu-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openModal(src, title) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('modalImg');
+      const caption = document.getElementById('modalCaption');
+
+      img.src = src;
+      caption.innerText = title;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+      if (e.target.id === 'lightboxModal') {
+        closeModalDirect();
+      }
+    }
+
+    function closeModalDirect() {
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModalDirect();
+    });
+  </script>
+
+</body>
+</html>
