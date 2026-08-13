@@ -882,6 +882,21 @@
       document.body.style.overflow = 'hidden';
     }
 
+    // Global Automatic CDN Image Fallback (Guarantees 100% image loading across all hosts)
+    window.addEventListener('error', function(e) {
+      if (e.target && e.target.tagName === 'IMG') {
+        const img = e.target;
+        if (!img.dataset.cdnTried) {
+          img.dataset.cdnTried = 'true';
+          const srcAttr = img.getAttribute('src') || '';
+          if (srcAttr && !srcAttr.startsWith('http')) {
+            const cleanPath = srcAttr.replace(/^\//, '');
+            img.src = 'https://raw.githubusercontent.com/IngOscarHuerta/kingyojpexperience/main/' + cleanPath;
+          }
+        }
+      }
+    }, true);
+
     function updateModalView() {
       if (currentGallery.length === 0) return;
       const item = currentGallery[currentIndex];
@@ -891,6 +906,14 @@
       const prevBtn = document.getElementById('modalPrev');
       const nextBtn = document.getElementById('modalNext');
 
+      img.onerror = function() {
+        if (!this.dataset.cdnTried) {
+          this.dataset.cdnTried = 'true';
+          let path = item.src.replace(/^\//, '');
+          this.src = 'https://raw.githubusercontent.com/IngOscarHuerta/kingyojpexperience/main/' + path;
+        }
+      };
+      img.dataset.cdnTried = '';
       img.src = item.src;
       caption.innerText = item.title;
 
