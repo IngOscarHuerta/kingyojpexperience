@@ -1,5 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/menu", "destination": "/menu/index.html" }
+  "routes": [
+    {
+      "src": "^/menu/?$",
+      "dest": "/index.html"
+    }
   ]
 }
